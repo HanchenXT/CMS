@@ -38,16 +38,16 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#posts"><i class="fa fa-fw fa-arrows-v"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="posts" class="collapse">
                             <li>
-                                <a href="#"> View All Posts </a>
+                                <a href="./posts.php"> View All Posts </a>
                             </li>
                             <li>
-                                <a href="#"> Add Posts </a>
+                                <a href="../category.php"> Add Posts </a>
                             </li>
                         </ul>
                     </li>
                     
                     <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                        <a href="../category.php"><i class="fa fa-fw fa-wrench"></i> Category </a>
                     </li>
                     
                     <li class="active">
