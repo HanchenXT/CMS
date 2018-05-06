@@ -32,7 +32,12 @@
                     <?php
                     while($row = mysqli_fetch_assoc($query_cate)) {
                         $cat_title = $row['cat_title'];
-                        echo "<li><a href='#'>{$cat_title}</a></li>";
+                        $cat_id = $row['cat_id'];
+                    ?>
+                    <li>
+                        <a href="category.php?category=<?php echo $cat_id; ?>"><?php echo $cat_title?></a>
+                    </li>
+                    <?php
                     }
                     ?>
                     
