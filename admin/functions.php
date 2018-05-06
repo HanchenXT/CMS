@@ -31,4 +31,34 @@ function delete_cate() {
     
 }
 
+// find category
+function find_cate($cat_id) {
+    
+    global $connection;
+    
+    $query = "SELECT * FROM categories WHERE cat_id = $cat_id ";
+    $query_edit = mysqli_query($connection, $query);
+    $row = mysqli_fetch_assoc($query_edit);
+       $cat_id = $row['cat_id'];
+       $cat_title = $row['cat_title'];
+    return $cat_title;
+}
+
+// confirm query
+function confirmQuery($result) {
+    
+    global $connection;
+
+    if(!$result ) {
+        die("QUERY FAILED ." . mysqli_error($connection));  
+    }
+}
+
+// clean the input string
+function escape($string) {
+
+    global $connection;
+    
+    return mysqli_real_escape_string($connection, trim($string));
+}
 ?>
