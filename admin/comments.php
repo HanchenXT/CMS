@@ -91,6 +91,21 @@ include "includes/header.php";
                                     }
                                 break;
                                 }
+                                // unapprove a post
+                                if (isset($_GET['unapprove'])) {
+                                    $id = $_GET['unapprove'];
+                                    $query = "UPDATE comments SET comment_status = 'Unapproved' WHERE comment_id = {$id}";
+                                    $unapprove_query = mysqli_query($connection, $query);
+                                    header("Location: comments.php");
+                                }
+        
+                                // unapprove a post
+                                if (isset($_GET['approve'])) {
+                                    $id = $_GET['approve'];
+                                    $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = {$id}";
+                                    $unapprove_query = mysqli_query($connection, $query);
+                                    header("Location: comments.php");
+                                }
 
                                 // delete a post
                                 if (isset($_GET['delete'])) {

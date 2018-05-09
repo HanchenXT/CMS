@@ -48,7 +48,9 @@ include "includes/header.php";
                                     <th>Image</th>
                                     <th>Tags</th>
                                     <th>Comments</th>
-                                    <th>Date</th>                                
+                                    <th>Date</th>
+                                    <th>Delete</th> 
+                                    <th>Edit</th>                                 
                                 </thead>
 
                                 <tbody>

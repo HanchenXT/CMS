@@ -22,8 +22,11 @@ include "includes/header.php";
             <div class="col-md-8">
                 
                 <?php
-                $query = "SELECT * FROM posts";
+                $query = "SELECT * FROM posts WHERE post_status = 'published' ";
                 $query_posts = mysqli_query($connection, $query);
+                
+                if ($query_posts) {
+                     
                     while($row = mysqli_fetch_assoc($query_posts)) {
                         $post_id = $row['post_id'];
                         $post_title = $row['post_title'];
@@ -66,9 +69,12 @@ include "includes/header.php";
                             </li>
                         </ul>
                         
-                    <?php
+                <?php
                     }
-                    ?>    
+                } else {
+                    echo "<h1 class='text-center'>No Post, Sorry</h1>";
+                }
+                ?>    
             </div>
             
             <!-- Blog Sidebar Widgets Column -->
