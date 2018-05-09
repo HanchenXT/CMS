@@ -56,6 +56,7 @@ include "includes/header.php";
                                 <tbody>
                                 <tr>
                                 <?php
+                                //view all comments
                                     $query = "SELECT * FROM comments";
                                     $query_comment = mysqli_query($connection, $query);
                                     while($row = mysqli_fetch_assoc($query_comment)) {
@@ -72,7 +73,15 @@ include "includes/header.php";
                                         echo "<td>{$comment_content}</td>";
                                         echo "<td>{$comment_email}</td>";
                                         echo "<td>{$comment_status}</td>";
-                                        echo "<td>{$comment_post_id}</td>";
+                                        
+                                        $query = "SELECT * FROM posts WHERE post_id = $comment_post_id ";
+                                        $select_query = mysqli_query($connection, $query);
+                                        while ($row = mysqli_fetch_assoc($select_query)) {
+                                            $post_id = $row['post_id'];
+                                            $post_title = $row['post_title'];
+                                            echo "<td><a href='../post.php?p_id={$post_id}'>{$post_title}</td>";
+                                        }
+                                        
                                         echo "<td>{$comment_date}</td>";
                                         echo "<td><a href='comments.php?approve={$comment_id}'>Approve</td>";
                                         echo "<td><a href='comments.php?unapprove={$comment_id}'>Unapprove</td>";
@@ -86,10 +95,9 @@ include "includes/header.php";
                                 // delete a post
                                 if (isset($_GET['delete'])) {
                                     $id = $_GET['delete'];
-                                    $query = "DELETE FROM posts WHERE post_id = {$id}";
+                                    $query = "DELETE FROM comments WHERE comment_id = {$id}";
                                     $delete_query = mysqli_query($connection, $query);
-                                    header("Location: posts.php");
-
+                                    header("Location: comments.php");
                                 }
         
                                 // edit a post
@@ -117,56 +125,3 @@ include "includes/header.php";
 
 </body>
 </html>
-               <!-- Comments Form
-                <div class="well">
-                    <h4>Leave a Comment:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-               
-                <hr>
-               
-                Posted Comments
-               
-                Comment
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
-               
-                Comment
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        Nested Comment
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="http://placehold.it/64x64" alt="">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Nested Start Bootstrap
-                                    <small>August 25, 2014 at 9:30 PM</small>
-                                </h4>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-                        End Nested Comment
-                    </div>
-                </div> -->
