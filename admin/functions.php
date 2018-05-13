@@ -169,8 +169,8 @@ function findAllCategories() {
         echo "<tr>";    
         echo "<td>{$cat_id}</td>";
         echo "<td>{$cat_title}</td>";
-        echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
-        echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
+        echo "<td><a href='category.php?delete={$cat_id}'>Delete</a></td>";
+        echo "<td><a href='category.php?edit={$cat_id}'>Edit</a></td>";
         echo "</tr>";
     }
 }
@@ -284,7 +284,7 @@ function login_user($username, $password) {
          $db_user_lastname = $row['user_lastname'];
          $db_user_role = $row['user_role'];
 
-         if (password_verify($password,$db_user_password)) {
+         if ($password == $db_user_password && $username == $db_username) {
              $_SESSION['username'] = $db_username;
              $_SESSION['firstname'] = $db_user_firstname;
              $_SESSION['lastname'] = $db_user_lastname;
