@@ -58,38 +58,36 @@ if(isset($_GET['edit'])){
         $query .= "WHERE post_id = {$the_post_id} ";
 
         $update_post = mysqli_query($connection,$query);
-
         confirmQuery($update_post);
-
         echo "<p class='bg-success'>Post Updated. <a href='../post.php?p_id={$the_post_id}'> View Post </a></p>";
     }
 ?>
     <form action="" method="post" enctype="multipart/form-data">    
         <div class="form-group">
-         <label for="title">Post Title</label>
-          <input value="<?php echo htmlspecialchars(stripslashes($post_title)); ?>"  type="text" class="form-control" name="post_title">
+            <label for="title">Post Title</label>
+            <input value="<?php echo htmlspecialchars(stripslashes($post_title)); ?>"  type="text" class="form-control" name="post_title">
         </div>
 
         <div class="form-group">
             <label for="categories">Categories</label>
             <select name="post_category" id="">
-            <?php
-            $query = "SELECT * FROM categories ";
-            $select_categories = mysqli_query($connection,$query);
-            confirmQuery($select_categories);
+                <?php
+                $query = "SELECT * FROM categories ";
+                $select_categories = mysqli_query($connection,$query);
+                confirmQuery($select_categories);
 
-            while($row = mysqli_fetch_assoc($select_categories )) {
-                $cat_id = $row['cat_id'];
-                $cat_title = $row['cat_title'];
+                while($row = mysqli_fetch_assoc($select_categories )) {
+                    $cat_id = $row['cat_id'];
+                    $cat_title = $row['cat_title'];
 
-                if($cat_id == $post_category_id) {
+                    if($cat_id == $post_category_id) {
 
-                echo "<option selected value='{$cat_id}'>{$cat_title}</option>";
-                } else {
-                echo "<option value='{$cat_id}'>{$cat_title}</option>";
+                    echo "<option selected value='{$cat_id}'>{$cat_title}</option>";
+                    } else {
+                    echo "<option value='{$cat_id}'>{$cat_title}</option>";
+                    }
                 }
-            }
-            ?>
+                ?>
             </select>
 
         </div>
@@ -97,34 +95,34 @@ if(isset($_GET['edit'])){
         <div class="form-group">
             <label for="users">Users</label>
             <select name="post_user" id="">
-            <?php
-            echo "<option value='{$post_user}'>{$post_user}</option>";
-            $users_query = "SELECT * FROM users";
-            $select_users = mysqli_query($connection,$users_query);
-            confirmQuery($select_users);
+                <?php
+                echo "<option value='{$post_user}'>{$post_user}</option>";
+                $users_query = "SELECT * FROM users";
+                $select_users = mysqli_query($connection,$users_query);
+                confirmQuery($select_users);
 
-            while($row = mysqli_fetch_assoc($select_users)) {
-                $user_id = $row['user_id'];
-                $username = $row['username'];
+                while($row = mysqli_fetch_assoc($select_users)) {
+                    $user_id = $row['user_id'];
+                    $username = $row['username'];
 
-                echo "<option value='{$username}'>{$username}</option>";
-            }
-            ?>
+                    echo "<option value='{$username}'>{$username}</option>";
+                }
+                ?>
             </select>
 
         </div>
 
         <div class="form-group">
             <select name="post_status" id="">
-            <option value='<?php echo $post_status ?>'><?php echo $post_status; ?></option>
+                <option value='<?php echo $post_status ?>'><?php echo $post_status; ?></option>
 
-            <?php
-            if($post_status == 'published' ) {
-                echo "<option value='draft'>Draft</option>";
-            } else {
-                echo "<option value='published'>Publish</option>";
-            }
-            ?>
+                <?php
+                if($post_status == 'published' ) {
+                    echo "<option value='draft'>Draft</option>";
+                } else {
+                    echo "<option value='published'>Publish</option>";
+                }
+                ?>
             </select>
         </div>
 
