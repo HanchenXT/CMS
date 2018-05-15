@@ -38,8 +38,72 @@ include "includes/header.php";
 
                             default:
                             ?>
+                            <?php
+                            if (isset($_POST['checkBoxArray'])) {
+                                foreach ($_POST['checkBoxArray'] as $checkedPostID) {
+                                    $bulk_options = $_POST['bulk_options']; 
+                                    switch ($bulk_options) {
+                                        case "published":
+                                            $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$checkedPostID} ";
+                                            $publish_query = mysqli_query($connection, $query);
+                                            confirmQuery($publish_query);
+                                            break;
+                                        
+                                        case 'draft':
+                                            $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$checkedPostID}  ";
+                                            $draft_query = mysqli_query($connection,$query);
+                                            confirmQuery($draft_query);
+                                            break;
+            
+                                        case 'delete':
+                                            $query = "DELETE FROM posts WHERE post_id = {$checkedPostID}  ";
+                                            $delete_query = mysqli_query($connection,$query);
+                                            confirmQuery($delete_query);
+                                            break;
+
+                                        case 'clone':
+                                            $query = "SELECT * FROM posts WHERE post_id = '{$checkedPostID}' ";
+                                            $select_post_query = mysqli_query($connection, $query);
+
+                                            while ($row = mysqli_fetch_array($select_post_query)) {
+                                                $post_title         = $row['post_title'];
+                                                $post_category_id   = $row['post_category_id'];
+                                                $post_date          = $row['post_date']; 
+                                                $post_author        = $row['post_author'];
+                                                $post_status        = $row['post_status'];
+                                                $post_image         = $row['post_image'] ; 
+                                                $post_tags          = $row['post_tags']; 
+                                                $post_content       = $row['post_content'];
+                                            }
+                 
+                                          $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date,post_image,post_content,post_tags,post_status) ";
+
+                                          $query .= "VALUES({$post_category_id},'{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content}','{$post_tags}', '{$post_status}') "; 
+
+                                          $clone_query = mysqli_query($connection, $query);  
+                                          confirmQuery($clone_query);
+                                          break;
+                                    }
+                                }
+                            }
+                            ?>
+                            <form action="" method = 'post'>
                             <table class="table table-bordered table-hover">
+                                <div id="bulkOption" class="col-xs-2">
+                                   <select class="form-control" name="bulk_options" id="">
+                                       <option value="">Select Options</option>
+                                       <option value="published">Publish</option>
+                                       <option value="draft">Draft</option>
+                                       <option value="delete">Delete</option>
+                                       <option value="clone">Clone</option>
+                                   </select>
+                                </div>
+                                <div class="col-xs-4">
+                                   <input type="submit" name="submit" class="btn btn-success" value="Apply">
+                                   <a href="add_post.php" class="btn btn-primary">Add New</a>
+                                </div>
                                 <thead>
+                                    <th><input id="selectAllBoxes" type="checkbox"></th>
                                     <th>ID</th>
                                     <th>Author</th>
                                     <th>Title</th>
@@ -69,6 +133,9 @@ include "includes/header.php";
                                        $post_comment_count = $row['post_comment_count'];
                                        $post_date = $row['post_date'];
                                         echo "<tr>";
+                                ?>
+                                        <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>
+                                <?php
                                         echo "<td>{$post_id}</td>";
                                         echo "<td>{$post_author}</td>";
                                         echo "<td>{$post_title}</td>";
@@ -101,6 +168,7 @@ include "includes/header.php";
                                 </tr>
                                 </tbody>
                             </table>
+                            </form>
                     </div>
                 </div>
                 <!-- /.row -->

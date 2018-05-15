@@ -207,7 +207,7 @@ function is_admin($username) {
 
     $row = mysqli_fetch_array($result);
 
-    if($row['user_role'] == 'admin'){
+    if($row['user_role'] == 'Admin'){
         return true;
     }else {
         return false;
@@ -289,7 +289,7 @@ function login_user($username, $password) {
              $_SESSION['firstname'] = $db_user_firstname;
              $_SESSION['lastname'] = $db_user_lastname;
              $_SESSION['user_role'] = $db_user_role;
-             redirect("/cms/admin");
+             redirect("/CMS/admin");
          } else {
              return false;
          }

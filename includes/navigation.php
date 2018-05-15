@@ -27,14 +27,16 @@ include "db.php";
                     <li>
                         <a href="admin/index.php">Admin</a>
                     </li>
-<!--
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
--->
+                    
+                    <?php
+                    if (isset($_SESSION['username'])) {
+                        if (isset($_GET['p_id'])) {
+                            $id = $_GET['p_id'];
+                            echo "<li><a href='admin/posts.php?source=edit_post&p_id={$id}'>Edit Post</a></li>";
+                        }
+                    }
+                    ?>
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
