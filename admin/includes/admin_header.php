@@ -1,11 +1,42 @@
-<?php
-ob_start();
-include "../includes/db.php";
-include "functions.php";
-?>
+<?php ob_start(); ?>
+<?php include "../includes/db.php"; ?>
+<?php include "functions.php"; ?>
+
+
+
+<?php session_start(); ?>
+
+
+<?php 
+
+
+
+
+if(isset($_SESSION['user_role'])) {
+
+
+
+} else {
+
+header("location: ../index.php");
+
+
+}
+
+
+
+
+ ?>
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
 
@@ -32,8 +63,30 @@ include "functions.php";
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/10.0.0/classic/ckeditor.js"></script>
 
+ <link href="css/styles.css" rel="stylesheet">
+
+ 
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+
+
+ <script src="http://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+
+    <!-- Can use this one below as well -->
+<!--   <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script> -->
+
+
+<script src="js/jquery.js"></script>
+
+
+ 
+
+
+ 
 </head>
-</html>
+
+<body>
+
+
+
